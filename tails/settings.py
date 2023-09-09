@@ -29,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -62,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # 'channels.middleware.ChannelsMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -107,6 +108,11 @@ DATABASES = {
 }
 
 
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+#DATABASES['default'] = dj_database_url.config(default='postgres://...'}
+DATABASES['default'].update(db_from_env)
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -151,6 +157,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS =[ 
     BASE_DIR / "static",
     ]
+STATIC_ROOT = os.path.join(BASE_DIR , 'static')    
+STATICFILES_DIRS = [
+    #os.path.join(BASE_DIR, "static_cdn"),                
+] 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -169,8 +179,8 @@ TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
 KEY=os.environ.get('KEY')
 SECRET=os.environ.get('SECRET')
 
-
-CELERY_BROKER_URL = 'amqp://guest@localhost:5672//'
+CELERY_BROKER_URL = os.environ['REDIS_URL']
+# CELERY_BROKER_URL = 'amqp://guest@localhost:5672//'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
@@ -196,14 +206,25 @@ CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 
 ASGI_APPLICATION = "tails.asgi.application"
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
     },
 }
+
+
 
 CACHES = {
     "default": {
