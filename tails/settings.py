@@ -221,7 +221,7 @@ CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 # }
 
 # Channels Configuration
-# ASGI_APPLICATION = "tails.asgi.application"
+ASGI_APPLICATION = "tails.asgi.application"
 
 REDIS_URL = os.environ.get('REDIS_URL', default=None)
 
