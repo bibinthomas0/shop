@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # 'channels.middleware.ChannelsMiddleware',
-     'whitenoise.middleware.WhiteNoiseMiddleware',
+    #  'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -165,7 +165,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Media files (uploads, user-generated content)
 MEDIA_URL = '/media/'
@@ -221,7 +221,7 @@ CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 # }
 
 # Channels Configuration
-ASGI_APPLICATION = "tails.asgi.application"
+# ASGI_APPLICATION = "tails.asgi.application"
 
 REDIS_URL = os.environ.get('REDIS_URL', default=None)
 
