@@ -23,7 +23,7 @@ from datetime import datetime, timedelta, timezone
 import pdfkit
 from xhtml2pdf import pisa
 from django.template.loader import get_template
-config =  pdfkit.configuration(wkhtmltopdf=r"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe")
+# config =  pdfkit.configuration(wkhtmltopdf=r"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe")
 # Create your views here.
 def Homepage(request):
     email = request.session.get("gmail")

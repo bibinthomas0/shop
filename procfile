@@ -1,5 +1,8 @@
 release: python manage.py migrate
-web: daphne tails.asgi:application --port $PORT --bind 0.0.0.0 -v2
+# web: daphne tails.asgi:application --port $PORT --bind 0.0.0.0 -v2
 celery: celery -A sending_email_app.celery worker -l info
 celerybeat: celery -A sending_email_app beat -l INFO
 celeryworker2: daphne tails.asgi:application --port $PORT --bind 0.0.0.0 -v2
+
+web: gunicorn --bind :8000 --workers 3 --threads 2 tails.wsgi:application
+websocket: daphne -b 0.0.0.0 -p 5000 tails.asgi:application

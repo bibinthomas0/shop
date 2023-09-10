@@ -96,17 +96,26 @@ AUTH_USER_MODEL = 'cust.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DATABASE_NAME'),
+#         'USER': os.environ.get('DATABASE_USER'),
+#         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': 'localhost',
+        'NAME': 'postgres',
+        'USER': 'bibin',
+        'PASSWORD': 'bibin1234',
+        'HOST': 'tailbase.cnn6zer3iumi.ap-south-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
-
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
@@ -153,19 +162,15 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS =[ 
-    BASE_DIR / "static",
-    ]
-STATIC_ROOT = os.path.join(BASE_DIR , 'static')    
-STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, "static_cdn"),                
-] 
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+# Media files (uploads, user-generated content)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CART_SESSION_ID = 'cart'
@@ -179,7 +184,7 @@ TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
 KEY=os.environ.get('KEY')
 SECRET=os.environ.get('SECRET')
 
-CELERY_BROKER_URL = os.environ['REDIS_URL']
+# CELERY_BROKER_URL = os.environ['REDIS_URL']
 # CELERY_BROKER_URL = 'amqp://guest@localhost:5672//'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
@@ -204,7 +209,7 @@ from django.core.asgi import get_asgi_application
 
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 
-ASGI_APPLICATION = "tails.asgi.application"
+# ASGI_APPLICATION = "tails.asgi.application"
 
 # CHANNEL_LAYERS = {
 #     "default": {
@@ -215,17 +220,21 @@ ASGI_APPLICATION = "tails.asgi.application"
 #     },
 # }
 
+# Channels Configuration
+ASGI_APPLICATION = "tails.asgi.application"
+
+REDIS_URL = os.environ('REDIS_URL', default=None)
+
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [REDIS_URL],
         },
     },
 }
 
-
-
+# Caches configuration
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -235,7 +244,10 @@ CACHES = {
         }
     }
 }
+
+# Session Cookie Name
 SESSION_COOKIE_NAME = "tails"
+
 
 # SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Or "django.contrib.sessions.backends.cache"
 
