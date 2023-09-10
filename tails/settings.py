@@ -166,9 +166,12 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # Static files (CSS, JavaScript, Images)
 # settings.py
 
+# settings.py
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 
 # Media files (uploads, user-generated content)
