@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["3.111.149.26", "tailsandco.shop", "www.tailsandco.shop"]
+
 
 
 # Application definition
