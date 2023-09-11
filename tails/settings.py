@@ -172,11 +172,15 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # Static files (CSS, JavaScript, etc.)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = '/home/ubuntu/project/shop/static/'
+STATIC_ROOT = '/var/www/static'
 
 # Media files (uploads, user-generated content)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/ubuntu/project/shop/media/'
+SECURE_HSTS_SECONDS = 31536000  # One year in seconds
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
