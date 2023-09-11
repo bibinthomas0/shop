@@ -110,11 +110,11 @@ AUTH_USER_MODEL = 'cust.CustomUser'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'tailss',
         'USER': 'bibin',
         'PASSWORD': 'bibin',
-        'HOST': 'localhost',
+        'HOST': '3.111.149.26',
         'PORT': '5432',
     }
 }
