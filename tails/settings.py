@@ -171,14 +171,14 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, '/home/ubuntu/project/shop')
+STATIC_ROOT = os.path.join(BASE_DIR, '/home/ubuntu/project/shop/')
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Media files (uploads, user-generated content)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/home/ubuntu/project/shop/')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
