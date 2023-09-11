@@ -110,7 +110,7 @@ AUTH_USER_MODEL = 'cust.CustomUser'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tailss',
         'USER': 'bibin',
         'PASSWORD': 'bibin',
@@ -175,7 +175,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Media files (uploads, user-generated content)

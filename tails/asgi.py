@@ -14,6 +14,10 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 from django.core.asgi import get_asgi_application
 
+
+
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+          
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tails.settings')
 django.setup()
 application = get_asgi_application()
